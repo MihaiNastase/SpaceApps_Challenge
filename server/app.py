@@ -13,6 +13,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required
 app = Flask(__name__)
 CORS(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+#####################################################################
 app.config['MYSQL_DATABASE_USER'] = 'root'
 #app.config['MYSQL_DATABASE_PASSWORD'] = ''
 app.config['MYSQL_DATABASE_DB'] = 'nasa_lunar'
@@ -30,9 +31,14 @@ authService.select_user('admin')
 #if(loginResp != False):
 #    login_user(loginResp)
 dbConnection.add_logs()
+#####################################################################
+
+
 
 @app.route('/', methods = ['GET'])
 def get_logs():
+    data = dbConnection.get_logs()
+    print(data)
     return jsonify({"Hello":"World!"})
 
 @app.route('/test', methods =['GET'])
