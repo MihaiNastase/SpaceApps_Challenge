@@ -60,9 +60,9 @@ def signup_post():
     loginResp = authService.select_user(username)
     if(loginResp == False):
         authService.create_user(username, password)
-        flash("Successfully created the user, you can now sign in!")
+        return "Success"
     else:
-        flash("Username is already taken")
+        return "Failure"
 
 @login_manager.user_loader
 def load_user(user_id):
