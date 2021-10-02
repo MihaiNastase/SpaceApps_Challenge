@@ -18,6 +18,8 @@ authService = authService(app)
 
 authService.create_user('admin', 'admin')
 
+dbConnection.add_logs()
+
 @app.route('/', methods = ['GET'])
 def get_logs():
     return jsonify({"Hello":"World!"})
@@ -25,6 +27,7 @@ def get_logs():
 @app.route('/test', methods =['GET'])
 def get_test():
     return LogModel("user112", "Huston, we have a problem").toJson()
+
 
 if __name__ == "__main__":
     app.run(debug=True)
