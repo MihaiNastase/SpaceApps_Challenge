@@ -16,13 +16,3 @@ class LogModel:
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__,
             sort_keys=True, indent=4)
-
-
-def main():
-    log: LogModel = LogModel("mihai_11", "Huston, we have a problem")
-    print(log.toJson())
-
-
-
-if __name__ == "__main__":
-    main()
