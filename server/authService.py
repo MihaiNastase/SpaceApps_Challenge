@@ -29,13 +29,15 @@ class authService:
     
     def select_user(self, username):
         cursor = self.db.conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE username = %s LIMIT 1", (username))
+        fetch_user_sql = "SELECT * FROM users WHERE username = '"'%s'"' LIMIT 1" % username
+        cursor.execute(fetch_user_sql)#("SELECT * FROM users WHERE username = %s LIMIT 1", (username))
         if(cursor.rowcount > 0):
             data = cursor.fetchone()
             data = user(data[0], data[1], data[2])
         else:
             data = False
         cursor.close()
+        print(fetch_user_sql)
         return data
 
     def check_password_hash(self, password, passwordHash):

@@ -51,8 +51,10 @@ def profile():
 
 @app.route('/login', methods=['POST'])
 def login_post():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    creds = request.get_json()
+    #print(creds)
+    username = creds['username'] #request.form.get('username')
+    password = creds['password'] #request.form.get('password')
 
     loginResp = authService.login(username, password)
     if(loginResp != False):
