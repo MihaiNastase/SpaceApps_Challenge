@@ -27,7 +27,7 @@ class db:
             message_text TEXT,
             verified INT(1),
             creation_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            modification_datetime TIMESTAMP
+            modification_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );"""
 
         cursor = self.conn.cursor()

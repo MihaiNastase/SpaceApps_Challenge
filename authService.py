@@ -13,6 +13,13 @@ class authService:
         cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, pw_hash))
         self.db.conn.commit()
         cursor.close()
-    
+
+    def create_log(self, user_id, message_text, verified):
+        cursor = self.db.conn.cursor()
+        cursor.execute("INSERT INTO log (user_id, message_text, verified) VALUES (%s, %s, %s)", (user_id, message_text, verified))
+        self.db.conn.commit()
+        cursor.close()
+
+        
 
 

@@ -13,6 +13,8 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 dbConnection = db(app)
 authService = authService(app)
 
+authService.create_log(12, 'test', 0)
+
 authService.create_user('admin', 'admin')
 @app.route('/')
 def hello():
