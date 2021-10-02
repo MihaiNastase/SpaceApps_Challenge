@@ -1,9 +1,11 @@
+from db import db
+from flask_bcrypt import Bcrypt
 class authService:
 
     def __init__(self, app):
         if(not hasattr(self, 'conn')):
             self.db = db(app)
-        #self.bcrypt = Bcrypt(app)
+        self.bcrypt = Bcrypt(app)
 
     def create_user(self, username, password):
         pw_hash = self.bcrypt.generate_password_hash(password).decode('utf-8')
