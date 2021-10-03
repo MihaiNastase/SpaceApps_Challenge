@@ -91,9 +91,9 @@ def login_post():
     loginResp = authService.login(username, password)
     if(loginResp != False):
         login_user(loginResp)
-        return ("Logged in")
+        return ({"status": True, "message": "Successfully logged in!"})
     else:
-        return "Login failed"
+        return ({"status": False, "message": "Failed to log in, please check your login combination again"})
 
 @app.route('/signup', methods=['POST'])
 def signup_post():

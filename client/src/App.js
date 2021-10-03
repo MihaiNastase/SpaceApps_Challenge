@@ -1,7 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import './CRT.css';
+import Login from './Login.js';
 import {useState, useEffect} from 'react';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 function App() {
 
@@ -21,6 +28,7 @@ function App() {
   },[]);
 
   return (
+    <Router>
     <div className="App">
       <h1 class="crt site-title">
       r/huston-we-have-a-problem
@@ -36,15 +44,15 @@ function App() {
           rel="noopener noreferrer"
         >
         </a>
-    {logs.map(ulog => {
-      return (
-        <div key = {ulog.id}>
-          <h2>{ulog.user_id}</h2>
-          <p>{ulog.message_text}</p>
-        </div>
-      )
-    })}
     </div>
+    <div>
+        <Switch>
+              <Route path="/" exact={true}>
+                <Login />
+              </Route>
+        </Switch>
+    </div>
+    </Router>
   );
 }
 
