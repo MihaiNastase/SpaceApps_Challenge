@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import { LogPage } from './LogPage';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 
 function App() {
@@ -43,6 +45,11 @@ function App() {
         </div>
       )
     })}
+      <BrowserRouter>
+    <div className="sans-serif">
+      <Route path="/log" component={LogPage} />
+    </div>
+  </BrowserRouter>
     </div>
   );
 }
