@@ -61,5 +61,3 @@ class db:
         cursor.close()
 
         return data
-        
-    #def add_log(self, )

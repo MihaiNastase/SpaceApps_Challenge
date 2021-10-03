@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import './CRT.css';
 import {useState, useEffect} from 'react';
 
 function App() {
@@ -21,8 +22,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <h1 class="crt site-title">
+      r/huston-we-have-a-problem
+      </h1>
+
         <p>
           Development build, work still in progress...
         </p>
@@ -32,9 +35,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          r/huston-we-have-a-problem
         </a>
-      </header>
     {logs.map(ulog => {
       return (
         <div key = {ulog.id}>
