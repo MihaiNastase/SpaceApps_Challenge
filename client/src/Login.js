@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 export default function Login() {
     const [state , setState] = useState({
-        userID : "",
+        username : "",
         password : ""
     })
     //When 'submit' clicked, send details to API
@@ -10,6 +10,7 @@ export default function Login() {
         e.preventDefault();
         sendDetails()
     }
+    //Handle inputs into input fields
     const handleChange = (e) => {
         const {id , value} = e.target
         setState(prevState => ({
@@ -20,11 +21,11 @@ export default function Login() {
     //JSONify the username and password
     const sendDetails = () => {
         const information =JSON.stringify({
-            "username":state.userID,
+            "username":state.username,
             "password":state.password
         })
         return(
-            <label defaultValue={state.userID}/>
+            <label defaultValue={state.username}/>
 
         )
     }
@@ -32,14 +33,14 @@ export default function Login() {
     return(
         //Display login Form
         <div className="">
-            <form>
+            <form method="post">
                 <div className="form-group text-left">
                 <label htmlFor="userID">UserID</label>
                 <input type="string"
                        className="form-control"
                        id="userID"
                        placeholder="Enter UserID"
-                       value={state.userID}
+                       value={state.username}
                        onChange={handleChange}
                 />
                 </div>
