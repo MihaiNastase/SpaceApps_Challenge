@@ -37,7 +37,6 @@ class authService:
         else:
             data = False
         cursor.close()
-        print(fetch_user_sql)
         return data
 
     def check_password_hash(self, password, passwordHash):

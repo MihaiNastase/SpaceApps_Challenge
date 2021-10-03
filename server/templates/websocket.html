@@ -1,0 +1,41 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+        var socket = io.connect();
+        socket.emit('onconnect', function() {
+            //Let the websocket we've connected
+        });
+
+        socket.on('response', function(data) {
+            console.log(data);
+        });
+
+        socket.on('inital_log', function(data) {
+            for(row of data) {
+                recieveMessage(row);
+            }
+        });
+
+        socket.on('update_log', function(data) {
+            recieveMessage(data);
+        });
+
+        function sendMessage() {
+            var text = document.getElementById('chatbox').value;
+            var data = {
+                'userId': 1,
+                'message_text': text,
+                'verified': 0
+            }
+            socket.emit('send_message', data);
+        }
+
+        function recieveMessage(data) {
+            var chat = document.getElementById('chat');
+            chat.innerHTML += "<br>Name: " + data.userId + " - " + data.message_text + " @ " + data.creation_datetime;
+        }
+    </script>
+    <input type="text" id="chatbox"/> 
+    <input type="button" onclick="sendMessage()" value="Send"/>
+    <p id="chat"/>
+</html>
