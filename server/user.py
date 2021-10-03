@@ -1,8 +1,7 @@
 class user:
 
-    def __init__(self, userId, username, password):
+    def __init__(self, userId, password):
         self.userId = userId
-        self.username = username
         self.password = password
         self.authenticated = False
 

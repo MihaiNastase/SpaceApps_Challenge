@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, render_template, redirect, url_for, request, flash, session
 from flask_cors import CORS
-from log_model import LogModel
 from db import db
 from authService import authService
 from flask_marshmallow import Marshmallow
