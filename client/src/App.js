@@ -35,7 +35,14 @@ function App() {
           r/huston-we-have-a-problem
         </a>
       </header>
-
+    {logs.map(ulog => {
+      return (
+        <div key = {ulog.id}>
+          <h2>{ulog.user_id}</h2>
+          <p>{ulog.message_text}</p>
+        </div>
+      )
+    })}
     </div>
   );
 }
