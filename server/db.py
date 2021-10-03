@@ -17,13 +17,14 @@ class db:
         
         create_user_sql = """
         CREATE TABLE IF NOT EXISTS users (
-            id VARCHAR(20) PRIMARY KEY ,
+            id INT(11) PRIMARY KEY AUTO_INCREMENT,
+            username VARCHAR(256),
             password TEXT
         );"""
         create_log_sql = """
         CREATE TABLE IF NOT EXISTS logs (
             id INT(11) PRIMARY KEY AUTO_INCREMENT,
-            user_id VARCHAR(20) NOT NULL,
+            user_id INT(20) NOT NULL,
             message_text TEXT,
             verified INT(1),
             creation_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -44,9 +45,9 @@ class db:
         add_logs_sql ="""
         INSERT INTO `logs` (`id`, `user_id`, `message_text`, `verified`, `creation_datetime`, `modification_datetime`) 
         VALUES 
-            (NULL, 'admin', 'This is log 1', NULL, current_timestamp(), current_timestamp()), 
-            (NULL, 'admin', 'This is log 2', NULL, current_timestamp(), current_timestamp()), 
-            (NULL, 'admin', 'This is log 3', NULL, current_timestamp(), current_timestamp());
+            (NULL, '1', 'This is log 1', NULL, current_timestamp(), current_timestamp()), 
+            (NULL, '1', 'This is log 2', NULL, current_timestamp(), current_timestamp()), 
+            (NULL, '1', 'This is log 3', NULL, current_timestamp(), current_timestamp());
         """
         cursor = self.conn.cursor()
         cursor.execute(add_logs_sql)
