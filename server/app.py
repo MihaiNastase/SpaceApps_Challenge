@@ -29,6 +29,7 @@ authService = authService(app)
 websocket = websocket(app)
 
 authService.create_user('admin', 'admin')
+authService.create_user('paul', 'paul')
 authService.select_user('admin')
 #loginResp = authService.login('admin', 'admin')
 #if(loginResp != False):
