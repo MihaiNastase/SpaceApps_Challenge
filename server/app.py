@@ -43,11 +43,10 @@ def handle_message():
     socketio.emit('inital_log', websocket.get_logs())
 
 @socketio.on('send_message')
-#@login_required
 def send_message(data):
     socketio.emit('update_log', websocket.get_specific_log(websocket.log_message(data['userId'], data['message_text'], data['verified'])))
 
-@app.route('/websocket_test', methods = ['GET'])
+@app.route('/log', methods = ['GET'])
 def websocket_test():
     return render_template('websocket.html')
 
