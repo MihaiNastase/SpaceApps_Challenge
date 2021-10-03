@@ -1,6 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import Login from './Login.js';
 import {useState, useEffect} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 function App() {
 
@@ -20,23 +26,33 @@ function App() {
   },[]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Development build, work still in progress...
-        </p>
-        <a
-          className="App-link"
-          href="https://2021.spaceappschallenge.org/challenges/statements/lunar-surface-operations-real-time-collaboration/teams/rhuston-we-have-a-problem/project"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          r/huston-we-have-a-problem
-        </a>
-      </header>
+      <Router>
+        <div className="App">
 
-    </div>
+              <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <p>
+                  Development build, work still in progress...
+                </p>
+                <a
+                  className="App-link"
+                  href="https://2021.spaceappschallenge.org/challenges/statements/lunar-surface-operations-real-time-collaboration/teams/rhuston-we-have-a-problem/project"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  r/huston-we-have-a-problem
+                </a>
+              </header>
+              <div>
+                  <Switch>
+                        <Route path="/" exact={true}>
+                          <Login />
+                        </Route>
+                  </Switch>
+              </div>
+        </div>
+      </Router>
+
   );
 }
 
