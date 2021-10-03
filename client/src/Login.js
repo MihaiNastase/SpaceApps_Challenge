@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from "axios";
 
 export default function Login() {
     const [state , setState] = useState({
@@ -20,38 +21,48 @@ export default function Login() {
     }
     //JSONify the username and password
     const sendDetails = () => {
-        const information =JSON.stringify({
-            "username":state.username,
-            "password":state.password
-        })
-        return(
-            <label defaultValue={state.username}/>
 
-        )
+        const body = {
+            "username":state.username,
+            "password":state.password,
+        }
+
+        axios.post('http://localhost:5000/login', body)
+            .then((response)=>{
+                 if(response.status === 200){
+                        setState(prevState => ({
+                            ...prevState,
+                            'logged in' : 'Logging in...'
+                        }))
+                        return(alert("IT FUCKING WORKKS"))
+                    }
+
+            })
+
     }
 
     return(
         //Display login Form
         <div className="">
-            <form method="post">
+            <form action="http://localhost:5000/login" method="post">
                 <div className="form-group text-left">
-                <label htmlFor="userID">UserID</label>
-                <input type="string"
-                       className="form-control"
-                       id="userID"
-                       placeholder="Enter UserID"
-                       value={state.username}
-                       onChange={handleChange}
+                    <label htmlFor="userID">Username</label>
+                    <input type="string"
+                           className="form-control"
+                           id="username"
+                           placeholder="Enter UserID"
+                           value={state.username}
+                           onChange={handleChange}
                 />
                 </div>
 
                 <div className="form-group text-left">
                     <label htmlFor="password">Password</label>
                     <input type="password"
-                        className="form-control"
-                        id="password"
-                        placeholder="Password"
-                        value={state.password}
+                           className="form-control"
+                           id="password"
+                           placeholder="Password"
+                           value={state.password}
                            onChange={handleChange}
                     />
                 </div>
