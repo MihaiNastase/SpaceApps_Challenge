@@ -13,7 +13,7 @@ class authService:
         cursor.execute("SELECT * FROM users WHERE id = %s LIMIT 1", (id))
         if(cursor.rowcount > 0):
             data = cursor.fetchone()
-            data = user(data[0], data[1])
+            data = user(data[0], data[1], data[2])
         else:
             data = False
         cursor.close()
@@ -23,17 +23,17 @@ class authService:
     def create_user(self, username, password):
         pw_hash = self.bcrypt.generate_password_hash(password).decode('utf-8')
         cursor = self.db.conn.cursor()
-        cursor.execute("INSERT INTO users (id, password) VALUES (%s, %s)", (username, pw_hash))
+        cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, pw_hash))
         self.db.conn.commit()
         cursor.close()
     
     def select_user(self, username):
         cursor = self.db.conn.cursor()
-        fetch_user_sql = "SELECT * FROM users WHERE id = '"'%s'"' LIMIT 1" % username
+        fetch_user_sql = "SELECT * FROM users WHERE username = '"'%s'"' LIMIT 1" % username
         cursor.execute(fetch_user_sql)#("SELECT * FROM users WHERE username = %s LIMIT 1", (username))
         if(cursor.rowcount > 0):
             data = cursor.fetchone()
-            data = user(data[0], data[1])
+            data = user(data[0], data[1], data[2])
         else:
             data = False
         cursor.close()

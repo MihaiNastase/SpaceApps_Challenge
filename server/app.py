@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template, redirect, url_for, request, f
 from flask_cors import CORS
 from db import db
 from authService import authService
+from flask_marshmallow import Marshmallow
 from flask.wrappers import Response
 from flaskext.mysql import MySQL
 from flask_bcrypt import Bcrypt
