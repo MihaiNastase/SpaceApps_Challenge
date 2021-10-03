@@ -1,12 +1,19 @@
-import logo from './logo.svg';
+
 import './App.css';
 import './CRT.css';
+import Dashboard from './Dashboard';
+import Login from './Login';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 
 function App() {
+  const [token, setToken] = useState();
 
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
+  /*
   const[logs, setLogs] = useState([]);
-
   useState(() => {
     fetch('http://localhost:5000/', {
       'methods':'GET',
@@ -19,31 +26,17 @@ function App() {
     .then(resp => setLogs(resp))
     .catch(error => console.log(error))
   },[]);
-
+  */
   return (
-    <div className="App">
-      <h1 class="crt site-title">
-      r/huston-we-have-a-problem
-      </h1>
-
-        <p>
-          Development build, work still in progress...
-        </p>
-        <a
-          className="App-link"
-          href="https://2021.spaceappschallenge.org/challenges/statements/lunar-surface-operations-real-time-collaboration/teams/rhuston-we-have-a-problem/project"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
-    {logs.map(ulog => {
-      return (
-        <div key = {ulog.id}>
-          <h2>{ulog.user_id}</h2>
-          <p>{ulog.message_text}</p>
-        </div>
-      )
-    })}
+    <div className="crt">
+      <h1 className="site-title">Application</h1>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
