@@ -10,7 +10,13 @@ export default function Login() {
         e.preventDefault();
         sendDetails()
     }
-
+    const handleChange = (e) => {
+        const {id , value} = e.target
+        setState(prevState => ({
+            ...prevState,
+            [id] : value
+        }))
+    }
     //JSONify the username and password
     const sendDetails = () => {
         const information =JSON.stringify({
@@ -34,6 +40,7 @@ export default function Login() {
                        id="userID"
                        placeholder="Enter UserID"
                        value={state.userID}
+                       onChange={handleChange}
                 />
                 </div>
 
@@ -44,6 +51,7 @@ export default function Login() {
                         id="password"
                         placeholder="Password"
                         value={state.password}
+                           onChange={handleChange}
                     />
                 </div>
 
