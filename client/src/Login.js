@@ -28,15 +28,17 @@ export default function Login() {
         }
 
         axios.post('http://localhost:5000/login', body)
-            .then((response)=>{
-                 if(response.status === 200){
-                        setState(prevState => ({
-                            ...prevState,
-                            'logged in' : 'Logging in...'
-                        }))
-                        return(alert("IT FUCKING WORKKS"))
-                    }
-
+                .then((response)=>{
+                     if(response.status === 200){
+                            if(response.data.status) {
+                                alert("Access Granted!");
+                                window.location.href = "http://localhost:5000/log";
+                            }
+                            else {
+                                return(alert("Permission Denied!"));
+                            }
+                }
+                
             })
 
     }
