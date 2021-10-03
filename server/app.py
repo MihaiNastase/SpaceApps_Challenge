@@ -6,7 +6,8 @@ from flask.wrappers import Response
 from flaskext.mysql import MySQL
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, logout_user, login_required
-
+from flask_socketio import SocketIO
+from websocket import websocket
 
 app = Flask(__name__)
 CORS(app)
@@ -20,8 +21,11 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+socketio = SocketIO(app)
+
 dbConnection = db(app)
 authService = authService(app)
+websocket = websocket(app)
 
 authService.create_user('admin', 'admin')
 authService.select_user('admin')
@@ -31,7 +35,20 @@ authService.select_user('admin')
 dbConnection.add_logs()
 #####################################################################
 
+@socketio.on('onconnect')
+#@login_required
+def handle_message():
+    #Return message log here to begin with
+    socketio.emit('inital_log', websocket.get_logs())
 
+@socketio.on('send_message')
+#@login_required
+def send_message(data):
+    socketio.emit('update_log', websocket.get_specific_log(websocket.log_message(data['userId'], data['message_text'], data['verified'])))
+
+@app.route('/websocket_test', methods = ['GET'])
+def websocket_test():
+    return render_template('websocket.html')
 
 @app.route('/', methods = ['GET'])
 def home():
@@ -60,6 +77,8 @@ def logout():
 @login_required
 def profile():
     return "Logged in - profile"
+
+
 
 @app.route('/login', methods=['POST'])
 def login_post():
