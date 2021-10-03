@@ -181,8 +181,17 @@ body {
   font-size: 2rem;
 }
 
-login-wrapper {
+.wrapper {
+
+}
+
+.login-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.login-wrapper button {
+  font-size: medium
 }
