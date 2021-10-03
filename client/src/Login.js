@@ -2,50 +2,52 @@ import React, {useState} from 'react';
 import axios from "axios";
 
 export default function Login() {
-    const [state , setState] = useState({
-        username : "",
-        password : ""
-    })
-    //When 'submit' clicked, send details to API
-    const handleSubmitClick = (e) => {
-        e.preventDefault();
-        sendDetails()
-    }
-    //Handle inputs into input fields
-    const handleChange = (e) => {
-        const {id , value} = e.target
-        setState(prevState => ({
-            ...prevState,
-            [id] : value
-        }))
-    }
-    //JSONify the username and password
-    const sendDetails = () => {
-
-        const body = {
-            "username":state.username,
-            "password":state.password,
+   const [state , setState] = useState({
+            username : "",
+            password : ""
+        })
+        //When 'submit' clicked, send details to API
+        const handleSubmitClick = (e) => {
+            e.preventDefault();
+            console.log(state.password)
+            sendDetails()
         }
+        //Handle inputs into input fields
+        const handleChange = (e) => {
+            const {id , value} = e.target
+            setState(prevState => ({
+                ...prevState,
+                [id] : value
+            }))
+        }
+        //JSONify the username and password
+        const sendDetails = () => {
 
-        axios.post('http://localhost:5000/login', body)
-            .then((response)=>{
-                 if(response.status === 200){
-                        setState(prevState => ({
-                            ...prevState,
-                            'logged in' : 'Logging in...'
-                        }))
-                        return(alert("IT FUCKING WORKKS"))
-                    }
+            const body = {
+                "username":state.username,
+                "password":state.password,
+            }
+
+            axios.post('http://localhost:5000/login', body)
+                .then((response)=>{
+                     if(response.status === 200){
+                            if(response.data.status) {
+                                return(alert("Access Granted!"));
+                            }
+                            else {
+                                return(alert("Permission Denied!"));
+                            }
+                }
 
             })
+        }
 
-    }
 
     return(
         //Display login Form
-        <div className="">
-            <form action="http://localhost:5000/login" method="post">
-                <div className="form-group text-left">
+        <div className="crt login-wrapper">
+            <form>
+                <div className="site-title">
                     <label htmlFor="userID">Username</label>
                     <input type="string"
                            className="form-control"
@@ -56,7 +58,7 @@ export default function Login() {
                 />
                 </div>
 
-                <div className="form-group text-left">
+                <div className="site-title">
                     <label htmlFor="password">Password</label>
                     <input type="password"
                            className="form-control"
@@ -77,8 +79,4 @@ export default function Login() {
             </form>
         </div>
     )
-
-
-
 }
-
