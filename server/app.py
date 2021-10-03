@@ -36,11 +36,19 @@ dbConnection.add_logs()
 
 
 @app.route('/', methods = ['GET'])
-def get_logs():
-    data = dbConnection.get_logs()
-    print(data)
+def home():
     return jsonify({"Hello":"World!"})
 
+@app.route('/logs', methods = ['GET'])
+def get_logs():
+    data = dbConnection.get_logs()
+    return jsonify(data)
+
+@app.route('/logs', methods = ['POST'])
+def post_log():
+    log = request.get_json()
+    return jsonify(log)
+    
 @app.route('/test', methods =['GET'])
 def get_test():
     return LogModel("user112", "Huston, we have a problem").toJson()
